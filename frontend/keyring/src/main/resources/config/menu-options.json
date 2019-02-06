@@ -1,0 +1,22 @@
+{
+	"menus":[
+	
+		{ 
+			"id": "sideMenu",
+			"links": [
+				{
+					"url": "/keyring/",
+					"label": "layout.application.menu.sideMenu.label.home"
+				},
+				{
+					"url": "/keyring/",
+					"label": "layout.application.menu.sideMenu.label.home"
+				}
+			
+			]
+		}
+	
+	]
+
+}
+	

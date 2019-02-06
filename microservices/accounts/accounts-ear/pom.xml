@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.gdiazs.banking</groupId>
+		<artifactId>accounts</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>accounts-ear</artifactId>
+	<name>AccountsEAR</name>
+	<description>Proyecto EAR</description>
+	<packaging>ear</packaging>
+	<build>
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<finalName>AccountsEAR</finalName>
+					<version>7</version>
+					<modules>
+						<webModule>
+							<groupId>io.gdiazs.banking</groupId>
+							<artifactId>accounts-web</artifactId>
+							<contextRoot>/accounts</contextRoot>
+							<bundleFileName>AccountsWeb.war</bundleFileName>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>io.gdiazs.banking</groupId>
+			<artifactId>accounts-web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,44 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>localConnector-1.0</feature>
+    	<feature>microProfile-1.4</feature>
+	    <feature>jpa-2.1</feature>
+    </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+    
+    <mpJwt audiences="targetService" id="jwtUserConsumer" issuer="www.banking.com" keyName="theKeyId" sharedKey="Test1234" signatureAlgorithm="HS256"/>
+    
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <enterpriseApplication id="accounts-ear" location="AccountsEAR.ear" name="accounts-ear"/>
+
+    <!-- Postgres coffee-shop-db definition -->
+    <dataSource id="DefaultDataSource"
+                jndiName="jdbc/bankingDS"
+                jdbcDriverRef="postgresql-driver"
+                type="javax.sql.ConnectionPoolDataSource"
+                transactional="true">
+ 
+        <properties serverName="localhost"
+                    portNumber="5432"
+                    databaseName="accounts_db"
+                    user="developer" password="{xor}CzosK25tbGs="/>
+    </dataSource>
+ 
+    <jdbcDriver id="postgresql-driver"
+                javax.sql.XADataSource="org.postgresql.xa.PGXADataSource"
+                javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource"
+                libraryRef="postgresql-library"/>
+ 
+    <library id="postgresql-library">
+        <fileset id="PostgreSQLFileset" dir="${wlp.install.dir}/lib"
+                includes="postgresql-42.2.5.jar"/>
+    </library>
+</server>
