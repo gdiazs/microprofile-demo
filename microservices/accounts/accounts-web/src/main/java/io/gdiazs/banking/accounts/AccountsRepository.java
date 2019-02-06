@@ -18,14 +18,14 @@ public class AccountsRepository {
 	public List<Account> findAllAccountsByUserId(String userId) throws AccountsException {
 		List<Account> resultList = null;
 		try {
-			
+
 			resultList = entityManager.createQuery(JPQL_FIND_ACCOUNTS_BY_USER_ID, Account.class)
-					.setParameter("userId", userId).getResultList();
-			
+					.setParameter("userId", userId).getResultList();				
+
 		} catch (PersistenceException ex) {
-			throw new AccountsException("Error al consultar las cuentas del usuario: " +userId ,  ex.getCause());
+			throw new AccountsException("Error al consultar las cuentas del usuario: " + userId, ex.getCause());
 		}
-		
-		throw new AccountsException("Error al consultar las cuentas del usuario: " +userId );
+
+		return resultList;
 	}
 }
