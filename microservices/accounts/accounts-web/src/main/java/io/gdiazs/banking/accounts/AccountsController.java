@@ -13,20 +13,29 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import io.gdiazs.banking.accounts.annotations.HandleAccountException;
 
 @Path("/accounts")
 @Named
-public class AccountsEndpoint {
+public class AccountsController {
 
 	@Inject
 	private AccountsRepository accountsDao;
+	
+    @Inject
+    @ConfigProperty(name = "injected.value")
+    private String injectedValue;
+
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@HandleAccountException
 	@RolesAllowed({"ROLE_OWNER"})
 	public Response  get(@QueryParam("userId") String userId) throws AccountsException {
+		
+		System.out.println(injectedValue);
 		Response response = null;
 		List<Account> findAllAccountsByUserId = accountsDao.findAllAccountsByUserId(userId);
 		
@@ -38,5 +47,10 @@ public class AccountsEndpoint {
 		
 	
 		return  response;
+	}
+	
+	public Response defaultMethod(String userId) {
+		System.out.println("Caida!, notificar o buscar una solución");
+		return Response.ok().build();
 	}
 }
