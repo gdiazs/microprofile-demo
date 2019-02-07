@@ -9,7 +9,7 @@ import org.eclipse.microprofile.auth.LoginConfig;
 @ApplicationPath("/api/v1")
 
 @LoginConfig(authMethod = "MP-JWT", realmName = "jwt-jaspi")
-@DeclareRoles({"admin"})
+@DeclareRoles({"ROLE_OWNER", "ROLE_ADMIN"})
 public class AccountsRestApplication extends Application {
 
 

@@ -10,6 +10,8 @@ public class HomeController extends ApplicationLayout{
 
 	@GetMapping("/")
 	public String index() {
+		
+		
 	
 		return "home/index";
 	}

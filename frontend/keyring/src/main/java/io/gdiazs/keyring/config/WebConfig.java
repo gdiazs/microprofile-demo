@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import io.gdiazs.keyring.commons.interceptors.SecurityInterceptor;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 
@@ -50,7 +52,10 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 	    registry.addInterceptor(localeChangeInterceptor());
+	    registry.addInterceptor(new SecurityInterceptor());
 	}
+	
+	
 
 	
 }

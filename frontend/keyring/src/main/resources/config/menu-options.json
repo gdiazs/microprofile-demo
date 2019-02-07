@@ -5,12 +5,12 @@
 			"id": "sideMenu",
 			"links": [
 				{
-					"url": "/keyring/",
-					"label": "layout.application.menu.sideMenu.label.home"
+					"url": "/keyring/accounts",
+					"label": "layout.application.menu.sideMenu.label.accounts"
 				},
 				{
 					"url": "/keyring/",
-					"label": "layout.application.menu.sideMenu.label.home"
+					"label": "layout.application.menu.sideMenu.label.loans"
 				}
 			
 			]
