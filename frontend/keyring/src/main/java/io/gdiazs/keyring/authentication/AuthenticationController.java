@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,7 +33,7 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/login")
-	public String doLogin(HttpServletRequest request, HttpServletResponse response) {
+	public String doLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		String user = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -40,7 +41,11 @@ public class AuthenticationController {
 		String jwt = authenticationService.doLogin(user, password);
 		
 		if(jwt.isEmpty()) {
+			model.addAttribute("error", "usuario o contraseña inválidos");
+			
 			return "redirect:/login";
+			
+			
 		}else {
 			this.saveCookie(response, jwt);
 		}
@@ -52,4 +57,7 @@ public class AuthenticationController {
 	private void saveCookie(HttpServletResponse response, String jwt) {
 		response.addCookie(new Cookie(USER_COOKIE, jwt));
 	}
+	
+	
+
 }
